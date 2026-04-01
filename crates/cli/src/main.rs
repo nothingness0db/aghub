@@ -223,7 +223,7 @@ fn main() -> Result<()> {
 
 	// Parse agent type
 	let agent_type = cli.agent.parse::<AgentType>().map_err(|e| {
-		anyhow::anyhow!("Unknown agent type: {} (valid: claude, opencode)", e)
+		anyhow::anyhow!("Unknown agent type: {e} (valid: claude, opencode)")
 	})?;
 	eprintln_verbose!("Agent type: {}", cli.agent);
 
@@ -290,7 +290,7 @@ fn main() -> Result<()> {
 					"No existing config found, will create new configuration"
 				);
 			} else {
-				return Err(anyhow::anyhow!("Failed to load config: {}", e));
+				return Err(anyhow::anyhow!("Failed to load config: {e}"));
 			}
 		}
 	}
@@ -423,14 +423,14 @@ mod describe {
 					.skills
 					.iter()
 					.find(|s| s.name == name)
-					.with_context(|| format!("Skill '{}' not found", name))?;
+					.with_context(|| format!("Skill '{name}' not found"))?;
 				eprintln_verbose!("Found skill: {}", skill.name);
 				println!("{}", serde_json::to_string_pretty(skill)?);
 			}
 			ResourceType::Mcps => {
 				let mcp =
 					config.mcps.iter().find(|m| m.name == name).with_context(
-						|| format!("MCP server '{}' not found", name),
+						|| format!("MCP server '{name}' not found"),
 					)?;
 				eprintln_verbose!("Found MCP server: {}", mcp.name);
 				println!("{}", serde_json::to_string_pretty(mcp)?);
