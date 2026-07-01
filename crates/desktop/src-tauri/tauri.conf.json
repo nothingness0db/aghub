@@ -59,7 +59,7 @@
 				}
 			}
 		},
-		"createUpdaterArtifacts": true
+		"createUpdaterArtifacts": false
 	},
 	"plugins": {
 		"deep-link": {
